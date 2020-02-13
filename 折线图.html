@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    canvas{
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="600" height="600"></canvas>
+
+  <script>
+    class DrawLine{
+      constructor(data){
+        this.cxt = document.querySelector('canvas').getContext('2d')
+        this.getSize = 10 // 网格大小
+        this.space = 20 
+        this.canvasWidth = this.cxt.canvas.width
+        this.canvasHeight = this.cxt.canvas.height
+        this.spotWidth = 6
+        this.arrowWidth = 10
+      }
+
+      init(){
+        this.drawGird()
+        this.drawCoordinate()
+        this.drawSpot(data)
+      }
+
+      drawGird(){
+        var widthNum = Math.floor(this.canvasWidth/this.getSize)
+        var heightNum = Math.floor(this.canvasHeight/this.getSize)
+        for(var i=0;i<=widthNum;i++){
+          this.cxt.strokeStyle = '#eee'
+          this.cxt.moveTo(i*this.getSize,0)
+          this.cxt.lineTo(i*this.getSize,this.canvasHeight)
+          this.cxt.stroke()
+        }
+        for(var i=0;i<=heightNum;i++){
+          this.cxt.moveTo(0,i*this.getSize)
+          this.cxt.lineTo(this.canvasWidth,i*this.getSize)
+          this.cxt.stroke()
+        }
+
+      }
+
+      drawCoordinate(){
+        console.log(this)
+        this.cxt.beginPath()
+        this.canvasX = this.space
+        this.canvasY = this.canvasHeight-this.space
+        
+        this.cxt.strokeStyle='#000'
+        this.cxt.moveTo(this.canvasX, this.canvasY)
+        this.cxt.lineTo(this.canvasWidth-this.space, this.canvasY)
+        this.cxt.stroke()
+
+        this.cxt.beginPath()
+        this.cxt.moveTo(this.canvasWidth-this.space, this.canvasY)
+        this.cxt.lineTo(this.canvasWidth-this.space-this.arrowWidth, this.canvasY-this.arrowWidth/2)
+        this.cxt.lineTo(this.canvasWidth-this.space-this.arrowWidth, this.canvasY+this.arrowWidth/2)
+        this.cxt.closePath()
+        this.cxt.fill()
+
+        this.cxt.beginPath()
+        this.cxt.moveTo(this.canvasX,this.canvasY)
+        this.cxt.lineTo(this.canvasX,this.space)
+        this.cxt.stroke()
+        this.cxt.beginPath()
+        this.cxt.moveTo(this.canvasX,this.canvasX)
+        this.cxt.lineTo(this.canvasX-this.arrowWidth/2,this.canvasX+this.arrowWidth)
+        this.cxt.lineTo(this.canvasX+this.arrowWidth/2,this.canvasX+this.arrowWidth)
+        this.cxt.fill()
+      }
+
+      drawSpot(data){
+        this.cxt.beginPath()
+        // console.log(data)
+        var perCanvasX = null
+        var perCanvasY = null 
+        data.map((item,i)=>{
+          var canvasX = item.x+this.space
+          var canvasY = this.canvasY - item.y
+          this.cxt.moveTo(canvasX-this.spotWidth/2,canvasY-this.spotWidth/2)
+          this.cxt.lineTo(canvasX-this.spotWidth/2,canvasY+this.spotWidth/2)
+          this.cxt.lineTo(canvasX+this.spotWidth/2,canvasY+this.spotWidth/2)
+          this.cxt.lineTo(canvasX+this.spotWidth/2,canvasY-this.spotWidth/2)
+          this.cxt.closePath()
+          this.cxt.fill()
+          this.cxt.stroke()
+          if(i != 0){
+            this.cxt.beginPath()
+            this.cxt.moveTo(perCanvasX,perCanvasY)
+            this.cxt.lineTo(canvasX,canvasY)
+            this.cxt.stroke()
+          }
+          perCanvasX = canvasX
+          perCanvasY = canvasY
+        })
+      }
+    }
+    var data = [
+      {
+        x:100,
+        y:120
+      },
+      {
+        x:150,
+        y:200
+      },
+      {
+        x:200,
+        y:150
+      },
+      {
+        x:250,
+        y:300
+      },
+      {
+        x:300,
+        y:400
+      }
+    ]
+    var line = new DrawLine()
+    line.init(data)
+
+    line.drawSpot([
+      {
+        x:100,
+        y:400
+      },
+      {
+        x:200,
+        y:200
+      },
+      {
+        x:300,
+        y:500
+      }
+    ])
+  </script>
+</body>
+</html>
