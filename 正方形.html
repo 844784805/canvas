@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width= , initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    canvas{
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="600" height="400"></canvas>
+  <script>
+    var myCanvas = document.querySelector('canvas')
+    var ctx = myCanvas.getContext('2d')
+    
+    ctx.moveTo(120,120)
+    ctx.lineTo(120,180)
+    ctx.lineTo(180,180)
+    ctx.lineTo(180,120)
+    ctx.closePath()
+
+    ctx.moveTo(100,100)
+   
+    ctx.lineTo(200,100)
+    ctx.lineTo(200,200)
+
+    ctx.lineTo(100,200)
+    // ctx.lineTo(10,100)
+    ctx.closePath()
+
+   
+    
+    
+    // ctx.stroke()
+    ctx.fill()
+
+    // 1、看一块区域是否填充
+    // 2、从这个区域拉一条直线
+    // 3、看和这条直线相交的轨迹
+    // 4、如果顺时针轨迹+1
+    // 5、如果逆时针轨迹-1
+    // 6、所有的轨迹的值计算出来
+    // 7、如果是非0那么填充
+    // 8、如果是0那么不填充
+
+  </script>
+  
+</body>
+</html> 

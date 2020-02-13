@@ -24,10 +24,27 @@
     xhr.stroke()
 
     xhr.beginPath()
-    xhr.moveTo(50, 100)
-    xhr.lineTo(100, 100 )
+    xhr.moveTo(0, 90)
+    xhr.lineTo(100, 90 )
     xhr.strokeStyle = 'red'
-    xhr.lineWidth= 5
+    xhr.lineCap = 'butt'
+    xhr.lineWidth= 15
+    xhr.stroke()
+
+    xhr.beginPath()
+    xhr.moveTo(0, 110)
+    xhr.lineTo(100, 110 )
+    xhr.strokeStyle = 'red'
+    xhr.lineCap = 'round'
+    xhr.lineWidth= 15
+    xhr.stroke()
+
+    xhr.beginPath()
+    xhr.moveTo(0, 130)
+    xhr.lineTo(100, 130 )
+    xhr.strokeStyle = 'red'
+    xhr.lineCap = 'square'
+    xhr.lineWidth= 15
     xhr.stroke()
 
     //默认的宽度是1px
